@@ -2,7 +2,9 @@
 
 ## lien miro et balsamiq
 story mapping : [https://miro.com/app/board/uXjVOwnQi48=/](https://miro.com/app/board/uXjVOwnQi48=/)
+
 maquette : [https://balsamiq.cloud/s6gnki0/pf1v7od](https://balsamiq.cloud/s6gnki0/pf1v7od)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.2.
 
 ## Development server
