@@ -1,0 +1,21 @@
+<div>
+    <button routerLink="/panier">Panier</button>
+    <h1>HOME</h1>
+    <button>messages</button>
+    <button routerLink="/profil">profil</button>
+</div>
+
+<h2>Nos dernières estimations</h2>
+
+<tr *ngFor="let image of Image"> 
+    <td>{{ image.url }}</td>  
+</tr>
+
+<p>Obtenez une estimation pour 5€</p>
+<p>et le certificat pour 5€ de plus</p>
+
+<h2> Exemple d'une estimation</h2>
+
+<p> blablabla exemple</p>
+
+<button routerLink="/estimation">Estimer mon produit</button>
