@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Images } from '../estimations_mois/estimations';
+import { Images } from '../service/estimations';
 
 export interface Image {
   url: string;
