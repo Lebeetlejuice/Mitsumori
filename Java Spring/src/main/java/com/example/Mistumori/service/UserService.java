@@ -15,7 +15,7 @@ public class UserService {
     private final UserDAO userDAO;
 
     @Autowired
-    public UserService(@Qualifier("PostGreesql") UserDAO userDAO) {
+    public UserService(@Qualifier("postgres") UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
@@ -29,5 +29,12 @@ public class UserService {
 
     public Optional<User> getPersonbyId(UUID id) {
         return userDAO.selectPersonById(id);
+    }
+
+    public int deletePerson(UUID id){
+        return userDAO.deletePersonById(id);
+    }
+    public int updatePerson(UUID id, User newUser){
+        return userDAO.updatePersonById(id, newUser);
     }
 }

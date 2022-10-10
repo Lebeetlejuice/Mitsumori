@@ -16,4 +16,8 @@ public interface UserDAO {
     List<User> selectAllPeople();
 
     Optional<User> selectPersonById(UUID id);
+
+    int deletePersonById(UUID id);
+
+    int updatePersonById(UUID id, User newUser);
 }
