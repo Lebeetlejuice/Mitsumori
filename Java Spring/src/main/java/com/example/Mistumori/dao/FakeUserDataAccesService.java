@@ -6,15 +6,14 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository("PostGreesql")
 public class FakeUserDataAccesService implements UserDAO{
     private static List<User> DB = new ArrayList<>();
 
     @Override
-    public int insertUser(UUID id, User user) {
-        DB.add(new User(id, user.getName()));
+    public int insertUser(Integer id, User user) {
+        DB.add(new User(id, user.getName(), user.getSurname()));
         return 1;
     }
 
@@ -24,14 +23,14 @@ public class FakeUserDataAccesService implements UserDAO{
     }
 
     @Override
-    public Optional<User> selectPersonById(UUID id) {
+    public Optional<User> selectPersonById(Integer id) {
         return DB.stream()
                 .filter(user -> user.getId().equals(id))
                 .findFirst();
     }
 
     @Override
-    public int deletePersonById(UUID id) {
+    public int deletePersonById(Integer id) {
         Optional<User> personMaybe = selectPersonById(id);
         if (personMaybe.isEmpty()) {
             return 0;
@@ -41,12 +40,12 @@ public class FakeUserDataAccesService implements UserDAO{
     }
 
     @Override
-    public int updatePersonById(UUID id, User updateUser){
+    public int updatePersonById(Integer id, User updateUser){
         return selectPersonById(id)
                 .map(user ->{
                     int indexofPersonToUpdate = DB.indexOf(user);
                     if(indexofPersonToUpdate >= 0){
-                        DB.set(indexofPersonToUpdate, new User(id, updateUser.getName()));
+                        DB.set(indexofPersonToUpdate, new User(id, updateUser.getName(), updateUser.getSurname()));
                         return 1;
                     }
                     return  0;
