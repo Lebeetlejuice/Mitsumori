@@ -10,6 +10,5 @@ public class MistumoriApplication {
 		SpringApplication.run(MistumoriApplication.class, args);
 	}
 
-
-
 }
+								

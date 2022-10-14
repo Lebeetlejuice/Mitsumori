@@ -5,6 +5,7 @@ import com.example.Mistumori.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,15 @@ public class UserController {
     @PostMapping
     public void addUser(@RequestBody User user){
         userService.addUser(user);
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@RequestBody HashMap<String, Object> userMap){
+        String name = (String) userMap.get("name");
+        String surname = (String) userMap.get("username");
+        String mdp = (String) userMap.get("mdp");
+        return mdp + surname + name ;
+
     }
 
     @GetMapping
