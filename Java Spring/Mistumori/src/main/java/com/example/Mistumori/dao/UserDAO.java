@@ -1,4 +1,4 @@
-package com.example.Mistumori.dao;
+/*package com.example.Mistumori.dao;
 
 import com.example.Mistumori.model.User;
 
@@ -20,3 +20,4 @@ public interface UserDAO {
 
     int updatePersonById(Integer id, User newUser);
 }
+*/

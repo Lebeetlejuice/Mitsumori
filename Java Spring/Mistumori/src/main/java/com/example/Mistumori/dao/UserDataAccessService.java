@@ -1,4 +1,4 @@
-package com.example.Mistumori.dao;
+/*package com.example.Mistumori.dao;
 
 import com.example.Mistumori.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,3 +60,4 @@ public class UserDataAccessService implements UserDAO{
         return 0;
     }
 }
+*/

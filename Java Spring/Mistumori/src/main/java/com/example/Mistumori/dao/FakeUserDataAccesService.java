@@ -1,4 +1,4 @@
-package com.example.Mistumori.dao;
+/*package com.example.Mistumori.dao;
 
 import com.example.Mistumori.model.User;
 import org.springframework.stereotype.Repository;
@@ -53,4 +53,4 @@ public class FakeUserDataAccesService implements UserDAO{
                 .orElse(0);
     }
 
-}
+}*/

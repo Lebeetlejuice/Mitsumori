@@ -9,22 +9,25 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Entity @Data @NoArgsConstructor @AllArgsConstructor
+@Table(name = "person")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String surname;
-    private String email;
+   // private String email;
     private String mdp;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
-    public User(@JsonProperty("id") Integer id, @JsonProperty("name") String name, @JsonProperty("surname") String surname) {
+    public User(@JsonProperty("id") Integer id, @JsonProperty("name") String name, @JsonProperty("surname") String surname, @JsonProperty("mdp") String mdp) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.email = email;
+     //   this.email = email;
         this.mdp = mdp;
     }
 
@@ -37,6 +40,9 @@ public class User {
     }
     public String getSurname() {
         return surname;
+    }
+    public String getMdp() {
+        return mdp;
     }
 }
   /*  public String getSurname() {
