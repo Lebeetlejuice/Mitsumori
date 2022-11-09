@@ -6,54 +6,90 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity @Data @NoArgsConstructor @AllArgsConstructor
-@Table(name = "person")
+@Entity
+@Table(name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String name;
-    private String surname;
-   // private String email;
-    private String mdp;
+    private Long id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+    @NotBlank
+    @Size(max = 20)
+    private String username;
 
-    public User(@JsonProperty("id") Integer id, @JsonProperty("name") String name, @JsonProperty("surname") String surname, @JsonProperty("mdp") String mdp) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-     //   this.email = email;
-        this.mdp = mdp;
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
+
+    @NotBlank
+    @Size(max = 120)
+    private String password;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    public User() {
     }
 
-    public Integer getId() {
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(Long id) {
+        this.id = id;
     }
-    public String getSurname() {
-        return surname;
+
+    public String getUsername() {
+        return username;
     }
-    public String getMdp() {
-        return mdp;
-    }
-}
-  /*  public String getSurname() {
-        return surname;
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getMdp() {
-        return mdp;
+    public void setEmail(String email) {
+        this.email = email;
     }
-}*/
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+}

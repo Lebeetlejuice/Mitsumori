@@ -6,15 +6,37 @@ import com.example.Mistumori.model.Role;
 import com.example.Mistumori.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service @RequiredArgsConstructor @Transactional @Slf4j
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepo.findBysurname((username));
+        if (user == null){
+            log.error("user not found");
+            throw new UsernameNotFoundException(("user not found"));
+        } else {
+            log.error("user found in db {}", username);
+        }
+
+        Collection< SimpleGrantedAuthority> authorities = new ArrayList<>();
+            user.getRoles().forEach(role -> {authorities.add(new SimpleGrantedAuthority(role.getName()));
+        });
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getMdp(), authorities);
+    }
 
     @Override
     public User saveUser(User user) {
