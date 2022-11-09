@@ -2,8 +2,7 @@ package com.example.Mistumori.security.jwt;
 
 import com.example.Mistumori.security.service.UserDetailsImpl;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,14 +10,8 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
-import javax.crypto.SecretKey;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
-import java.security.SignatureException;
-import java.util.Base64;
 import java.util.Date;
 
 @Component
