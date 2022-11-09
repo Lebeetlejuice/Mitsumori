@@ -2,7 +2,6 @@ package com.example.Mistumori;
 
 import com.example.Mistumori.model.Role;
 import com.example.Mistumori.model.User;
-import com.example.Mistumori.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,12 +21,6 @@ public class MistumoriApplication {
 	/*@Bean
 	PasswordEncoder passwordEncoder()
 	*/
-	@Bean
-	CommandLineRunner run(UserService userService){
-		return args -> {
-
-		};
-	}
 }
 
 								

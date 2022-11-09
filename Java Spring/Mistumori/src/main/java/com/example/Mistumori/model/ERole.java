@@ -1,7 +1,10 @@
 package com.example.Mistumori.model;
 
+import javax.persistence.Table;
+
+
 public enum ERole {
-    ROLE_USER,
-    ROLE_MODERATOR,
-    ROLE_ADMIN
+    USER,
+    MODERATOR,
+    ADMIN
 }

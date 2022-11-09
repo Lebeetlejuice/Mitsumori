@@ -1,5 +1,6 @@
 package com.example.Mistumori.security;
 
+import com.example.Mistumori.security.jwt.AuthEntryPointJwt;
 import com.example.Mistumori.security.jwt.AuthTokenFilter;
 import com.example.Mistumori.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,9 @@ import javax.servlet.Filter;
         // securedEnabled = true,
         // jsr250Enabled = true,
         prePostEnabled = true)
-public class SecurityConfig extends We { // extends WebSecurityConfigurerAdapter {
+public class SecurityConfig { // extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -45,7 +46,7 @@ public class SecurityConfig extends We { // extends WebSecurityConfigurerAdapter
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-        authProvider.setUserDetailsService((UserDetailsService) userDetailsService);
+        authProvider.setUserDetailsService(userDetailsServiceImpl);
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;

@@ -11,32 +11,29 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
+import javax.crypto.SecretKey;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.SignatureException;
 import java.util.Base64;
 import java.util.Date;
-import io.jsonwebtoken.impl.crypto.MacProvider;
 
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${bezkoder.app.jwtSecret}")
+    @Value("${example.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${bezkoder.app.jwtExpirationMs}")
+    @Value("${example.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    @Value("${bezkoder.app.jwtCookieName}")
+    @Value("${example.app.jwtCookieName}")
     private String jwtCookie;
 
-    private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(this.jwtSecret);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
     public String getJwtFromCookies(HttpServletRequest request) {
         Cookie cookie = WebUtils.getCookie(request, jwtCookie);
         if (cookie != null) {
@@ -79,13 +76,14 @@ public class JwtUtils {
     }
 
     public String generateTokenFromUsername(String username) {
+
         Date now = new Date();
-        Date exp = new Date((new Date()).getTime() + jwtExpirationMs);
+        Date exp = new Date(System.currentTimeMillis() + jwtExpirationMs);
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(now)
                 .setExpiration(exp)
-                .signWith(getSigningKey())
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
 }
