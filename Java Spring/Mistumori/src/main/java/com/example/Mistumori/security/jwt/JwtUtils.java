@@ -1,5 +1,6 @@
 package com.example.Mistumori.security.jwt;
 
+import com.example.Mistumori.model.User;
 import com.example.Mistumori.security.service.UserDetailsImpl;
 import io.jsonwebtoken.*;
 
@@ -27,23 +28,50 @@ public class JwtUtils {
     @Value("${example.app.jwtCookieName}")
     private String jwtCookie;
 
-    public String getJwtFromCookies(HttpServletRequest request) {
-        Cookie cookie = WebUtils.getCookie(request, jwtCookie);
+    @Value("${example.app.jwtRefreshCookieName}")
+    private String jwtRefreshCookie;
+    private String getCookieValueByName(HttpServletRequest request, String name) {
+        Cookie cookie = WebUtils.getCookie(request, name);
         if (cookie != null) {
             return cookie.getValue();
         } else {
             return null;
         }
     }
+    public String getJwtFromCookies(HttpServletRequest request) {
+        return getCookieValueByName(request, jwtCookie);
+    }
+
+    public String getJwtRefreshFromCookies(HttpServletRequest request) {
+        return getCookieValueByName(request, jwtRefreshCookie);
+    }
+
+    private ResponseCookie generateCookie(String name, String value, String path) {
+        ResponseCookie cookie = ResponseCookie.from(name, value).path(path).maxAge(24 * 60 * 60).httpOnly(true).build();
+        return cookie;
+    }
+
+    public ResponseCookie generateRefreshJwtCookie(String refreshToken) {
+        return generateCookie(jwtRefreshCookie, refreshToken, "/api/auth/refreshtoken");
+    }
 
     public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
         String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
-        return cookie;
+        return generateCookie(jwtCookie, jwt, "/api");
+    }
+
+    public ResponseCookie generateJwtCookie(User user) {
+        String jwt = generateTokenFromUsername(user.getUsername());
+        return generateCookie(jwtCookie, jwt, "/api");
     }
 
     public ResponseCookie getCleanJwtCookie() {
         ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
+        return cookie;
+    }
+
+    public ResponseCookie getCleanJwtRefreshCookie() {
+        ResponseCookie cookie = ResponseCookie.from(jwtRefreshCookie, null).path("/api/auth/refreshtoken").build();
         return cookie;
     }
 
@@ -71,7 +99,7 @@ public class JwtUtils {
     public String generateTokenFromUsername(String username) {
 
         Date now = new Date();
-        Date exp = new Date(System.currentTimeMillis() + jwtExpirationMs);
+        Date exp = new Date((new Date()).getTime() + jwtExpirationMs);
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(now)

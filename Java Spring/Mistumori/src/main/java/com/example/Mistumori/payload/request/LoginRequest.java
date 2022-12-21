@@ -1,5 +1,6 @@
 package com.example.Mistumori.payload.request;
 
+
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
