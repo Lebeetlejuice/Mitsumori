@@ -43,9 +43,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany( targetEntity = Estimation.class, mappedBy = "user")
-    private List<Estimation> estimation = new ArrayList<>();
-
     public User() {
     }
 

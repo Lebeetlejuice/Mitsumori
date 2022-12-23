@@ -1,16 +1,14 @@
 package com.example.Mistumori.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.sql.Blob;
 import java.util.Date;
 
 @Entity
@@ -39,27 +37,32 @@ public class Estimation {
     @NotBlank
     private Date date;
 
+    @Lob
+    private byte[] img;
+
     @Size(max= 150)
     @NotBlank
     private String Description;
 
-    @ManyToOne(fetch= FetchType.LAZY, optional = false)
-    @JoinColumn(name = "users_id", referencedColumnName = "id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private User user;
 
-    public User getUser() {
-        return user;
+    private Long users_id;
+
+    public Long getUser_id() {
+        return users_id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser_id(Long users_id) {
+        this.users_id = users_id;
+    }
+
+    public Estimation(Long users_id) {
+        this.users_id = users_id;
     }
 
     public Estimation(){
 
     }
+
 
     public Estimation(long id, String brand, String categorie, String name, Integer price, Date date, String description, User user) {
         this.id = id;
