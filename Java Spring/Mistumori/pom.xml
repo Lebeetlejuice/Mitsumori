@@ -15,6 +15,8 @@
 	<name>Mistumori</name>
 	<description>Projet 3 aston</description>
 	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>17</java.version>
 	</properties>
 

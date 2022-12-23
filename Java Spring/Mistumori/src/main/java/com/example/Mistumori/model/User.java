@@ -6,12 +6,15 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
 @Entity
-@Table(name = "users",
+@Table(name = "USERS",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "password")
@@ -40,6 +43,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany( targetEntity = Estimation.class, mappedBy = "user")
+    private List<Estimation> estimation = new ArrayList<>();
 
     public User() {
     }
