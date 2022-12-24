@@ -92,9 +92,10 @@
 			<version>0.11.5</version>
 			<scope>runtime</scope>
 		</dependency>
-	</dependencies>
+    </dependencies>
 
 	<build>
+		<finalName>application</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

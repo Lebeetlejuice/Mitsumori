@@ -21,4 +21,8 @@ public class EstimationService {
     public List<Estimation> listAllEstimation() {
         return estimationRepo.findAll();
     }
+
+    public void deleteEstimation(Long id) {
+        estimationRepo.deleteById(id);
+    }
 }

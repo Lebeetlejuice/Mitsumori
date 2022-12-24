@@ -5,11 +5,14 @@ import com.example.Mistumori.Repository.EstimationRepo;
 import com.example.Mistumori.Repository.UserRepo;
 import com.example.Mistumori.model.Estimation;
 import com.example.Mistumori.model.User;
+import com.example.Mistumori.payload.response.MessageResponse;
 import com.example.Mistumori.security.service.EstimationService;
 import com.example.Mistumori.security.service.UserDetailsImpl;
 import com.example.Mistumori.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,6 +36,9 @@ public class EstimationController{
     @Autowired
     EstimationService estimationService;
 
+    @Autowired
+    EstimationRepo estimationRepo;
+
 
     @PostMapping("/post")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
@@ -40,17 +46,27 @@ public class EstimationController{
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        Optional<User> user = userRepo.findByUsername(userDetails.getUsername());
-
 
         Long userid = userDetails.getId();
         estimation.setUsers_id(userid);
-        System.out.println(userid);
-        System.out.println(userDetails.getId());
-        System.out.println(user);
         estimationService.saveEstimation(estimation);
 
         return "votre estimation a bien été sauvegarder " + userDetails.getId();
+    }
+
+    @PutMapping("/put/{id}")
+    public ResponseEntity<String> put(@PathVariable("id") Long id,@RequestBody Estimation estimation ) {
+        Estimation updateEstimation = estimationRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Error: estimation is not found id."));
+        updateEstimation.setName(estimation.getName());
+        estimationService.saveEstimation(estimation);
+        return new ResponseEntity<String>("Estimation is updated successfully.!", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+        estimationService.deleteEstimation(id);
+        return new ResponseEntity<String>("Estimation is deleted successfully.!", HttpStatus.OK);
     }
 
     @GetMapping("/mod")
