@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {HttpClientModule} from '@angular/common/http';
 import { InscriptionComponent } from './inscription.component';
+import { FormsModule } from '@angular/forms';
 
 describe('InscriptionComponent', () => {
   let component: InscriptionComponent;
@@ -8,7 +9,9 @@ describe('InscriptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InscriptionComponent ]
+      declarations: [ InscriptionComponent ],
+      imports: [HttpClientModule,FormsModule],
+      providers: [InscriptionComponent]
     })
     .compileComponents();
 

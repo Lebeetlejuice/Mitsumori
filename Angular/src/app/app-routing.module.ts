@@ -13,7 +13,7 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 
 //creation des routes ici 
-const routes: Routes = [
+export const routes: Routes = [
   {path: 'sliders', component: SlidersComponent},
   {path: 'auth', component: AuthComponent},
   {path: 'inscription', component: InscriptionComponent},
@@ -22,7 +22,8 @@ const routes: Routes = [
   {path: 'panier', component: PanierComponent},
   {path: 'profil', component: ProfilComponent},
   { path: 'user', component: BoardUserComponent },
-  { path: 'mod', component: BoardModeratorComponent },
+  { path: 'doestimation', component: DoEstimationComponent},
+  {path: "mod",component: BoardModeratorComponent,},
   { path: 'admin', component: BoardAdminComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ]

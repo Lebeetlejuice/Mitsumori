@@ -9,6 +9,7 @@ import { AuthService } from '../_services/auth.service';
 export class InscriptionComponent implements OnInit {
   form: any = {
     username: null,
+    name: null,
     email: null,
     password: null
   };

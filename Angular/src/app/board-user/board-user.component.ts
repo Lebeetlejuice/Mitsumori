@@ -8,10 +8,16 @@ import { UserService } from '../_services/user.service';
 })
 export class BoardUserComponent implements OnInit {
   content?: string;
+  data: any;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.getDataUsers().subscribe(data=>{
+      console.warn(data);
+      this.data=JSON.parse(data)
+    })
+    
     this.userService.getUserBoard().subscribe({
       next: data => {
         this.content = data;

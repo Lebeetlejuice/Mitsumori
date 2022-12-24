@@ -2,5 +2,18 @@
     <header class="jumbotron">
       <p>{{ content }}</p>
     </header>
+     <table>
+      <p>{{ data }}</p>
+      <tr>
+        <th>id</th>
+        <th>username</th>
+        <th>email</th>
+      </tr>
+      <tbody>
+        <tr *ngFor="let user of data">
+          <p>{{user.id}}</p>
+        <p>{{user.username}}</p>
+ 
+      </tbody>
+    </table>
   </div>
-  

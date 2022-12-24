@@ -11,12 +11,14 @@ import { EventBusService } from './_shared/event-bus.service';
 })
 
 export class AppComponent {
+  title = "Mistumori";
     private roles: string[] = [];
     isLoggedIn = false;
     showAdminBoard = false;
     showModeratorBoard = false;
     username?: string;
   
+
     eventBusSub?: Subscription;
   
     constructor(
@@ -31,7 +33,7 @@ export class AppComponent {
       if (this.isLoggedIn) {
         const user = this.storageService.getUser();
         this.roles = user.roles;
-  
+        
         this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
         this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
   
@@ -56,4 +58,5 @@ export class AppComponent {
         }
       });
     }
+
   }

@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoEstimationComponent implements OnInit {
 
+  form: any = {
+    brand: null,
+    name: null,
+    date: null,
+    description: null,
+    etat_du_produit: null
+  };
   constructor() { }
 
   ngOnInit(): void {

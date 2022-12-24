@@ -8,10 +8,14 @@ import { UserService } from '../_services/user.service';
 })
 export class BoardAdminComponent implements OnInit {
   content?: string;
-
+  data : any
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.getDataUsers().subscribe(data=>{
+      console.warn(data);
+      this.data=JSON.parse(data)
+    })
     this.userService.getAdminBoard().subscribe({
       next: data => {
         this.content = data;

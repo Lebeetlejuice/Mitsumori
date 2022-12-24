@@ -13,9 +13,12 @@ export class UserService {
   getPublicContent(): Observable<any> {
     return this.http.get(API_URL + 'all', { responseType: 'text' });
   }
+  getDataUsers(): Observable<any> {
+    return this.http.get(API_URL + 'user', { responseType: 'text' });
+  }
 
   getUserBoard(): Observable<any> {
-    return this.http.get(API_URL + 'user', { responseType: 'text' });
+    return this.http.get(API_URL + 'users', { responseType: 'text' });
   }
   
   getModeratorBoard(): Observable<any> {

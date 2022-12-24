@@ -18,6 +18,7 @@ public class RoutesController {
     UserService userService;
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
     public String allAccess() {
         return "Public Content.";
     }
@@ -25,7 +26,7 @@ public class RoutesController {
     @GetMapping("/users")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
     public String userAccess() {
-        return "Moderator Board.";
+        return "User Board.";
     }
 
     @GetMapping("/user")
