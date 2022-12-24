@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Images } from '../service/estimations';
+
 
 export interface Image {
   url: string;
@@ -17,7 +17,7 @@ export class SlidersComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  Image = Images;
+
 
   
 }

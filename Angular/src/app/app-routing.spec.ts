@@ -3,14 +3,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 import { routes } from './app-routing.module';
-import { HomeComponent } from './home/home.component';
-import { SlidersComponent } from './sliders/sliders.component';
-import { InscriptionComponent } from './inscription/inscription.component';
-import { AuthComponent } from './auth/auth.component';
-import { ProfilComponent } from './profil/profil.component';
-import { BoardUserComponent } from './board-user/board-user.component';
-import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { HomeComponent } from './components/home/home.component';
+import { SlidersComponent } from './components/sliders/sliders.component';
+import { InscriptionComponent } from './components/inscription/inscription.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { ProfilComponent } from './components/profil/profil.component';
+import { BoardUserComponent } from './components/board-user/board-user.component';
+import { BoardModeratorComponent } from './components/board-moderator/board-moderator.component';
+import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 
 describe('AppComponent', () => {
   beforeEach((() => {
