@@ -31,6 +31,9 @@ public class Estimation {
     @NotBlank
     private String categorie;
 
+    @Size(max= 20)
+    @NotBlank
+    private String etat_du_produit;
     @NotBlank
     private Integer price;
 
