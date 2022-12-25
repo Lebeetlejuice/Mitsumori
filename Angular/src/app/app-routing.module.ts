@@ -8,9 +8,10 @@ import { HomeComponent } from './components/home/home.component';
 import { DoEstimationComponent } from './components/do-estimation/do-estimation.component';
 import { PanierComponent } from './components/panier/panier.component';
 import { ProfilComponent } from './components/profil/profil.component';
-import { BoardUserComponent } from './components/board-user/board-user.component';
-import { BoardModeratorComponent } from './components/board-moderator/board-moderator.component';
-import { BoardAdminComponent } from './components/board-admin/board-admin.component';
+import { BoardUserComponent } from './components/accueil-user/board-user.component';
+import { BoardModeratorComponent } from './components/list-estimation-moderator/board-moderator.component';
+import { BoardAdminComponent } from './components/list-user-admin/board-admin.component';
+import { ModifyestimationComponent } from './modifyestimation/modifyestimation.component';
 
 //creation des routes ici 
 export const routes: Routes = [
@@ -22,6 +23,7 @@ export const routes: Routes = [
   {path: 'panier', component: PanierComponent},
   {path: 'profil', component: ProfilComponent},
   { path: 'user', component: BoardUserComponent },
+  { path: 'put/:id', component: ModifyestimationComponent },
   { path: 'doestimation', component: DoEstimationComponent},
   {path: "mod",component: BoardModeratorComponent,},
   { path: 'admin', component: BoardAdminComponent },

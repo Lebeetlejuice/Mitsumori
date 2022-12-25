@@ -1,0 +1,27 @@
+<div class="container">
+    <header class="jumbotron">
+      <p>{{ content }}</p>
+    </header>
+     <table>
+      <tbody>
+        <tr *ngFor="let estimation of data">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">id : {{estimation.id}}</li>
+              <li class="list-group-item">marque : {{estimation.brand}}</li>
+              <li class="list-group-item">nom de l'objet : {{estimation.name}}</li>
+              <li class="list-group-item">etat du produit : {{estimation.etat_du_produit}}</li>
+              <li class="list-group-item">prix : {{estimation.price}}</li>
+              <li class="list-group-item">date : {{estimation.date | date: 'yyyy-MM-dd'}}</li>
+            </ul>
+            <div class="card-body">
+              <button [routerLink]="['/put', estimation.id]">edit </button>
+              <a href="#" class="card-link">delete</a>
+            </div>
+          </div>
+      </tbody>
+    </table>
+  </div>

@@ -12,10 +12,11 @@ import { HomeComponent } from './components/home/home.component';
 import { DoEstimationComponent } from './components/do-estimation/do-estimation.component';
 import { PanierComponent } from './components/panier/panier.component';
 import { ProfilComponent } from './components/profil/profil.component';
-import { BoardAdminComponent } from './components/board-admin/board-admin.component';
-import { BoardModeratorComponent } from './components/board-moderator/board-moderator.component';
-import { BoardUserComponent } from './components/board-user/board-user.component';
+import { BoardAdminComponent } from './components/list-user-admin/board-admin.component';
+import { BoardModeratorComponent } from './components/list-estimation-moderator/board-moderator.component';
+import { BoardUserComponent } from './components/accueil-user/board-user.component';
 import { httpInterceptorProviders} from './_helpers/auth.interceptor';
+import { ModifyestimationComponent } from './modifyestimation/modifyestimation.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { httpInterceptorProviders} from './_helpers/auth.interceptor';
     BoardAdminComponent,
     BoardModeratorComponent,
     BoardUserComponent,
+    ModifyestimationComponent,
   ],
   imports: [
     BrowserModule,
