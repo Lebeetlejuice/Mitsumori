@@ -64,6 +64,8 @@ public class EstimationController{
                     estimat.setDescription(estimation.getDescription());
                     estimat.setDate(estimation.getDate());
                     estimat.setBrand(estimation.getBrand());
+                    estimat.setEtat_du_produit(estimation.getEtat_du_produit());
+                    estimat.setBrand(estimation.getBrand());
                     return estimationService.saveEstimation(estimat);
                 }
                 )

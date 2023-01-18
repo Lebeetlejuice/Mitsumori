@@ -47,7 +47,6 @@ public class Estimation {
     @NotBlank
     private String Description;
 
-
     private Long users_id;
 
     public Long getUser_id() {
