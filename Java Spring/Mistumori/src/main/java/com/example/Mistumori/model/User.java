@@ -1,5 +1,6 @@
 package com.example.Mistumori.model;
 
+
 import lombok.*;
 
 import javax.persistence.*;

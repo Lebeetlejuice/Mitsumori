@@ -4,19 +4,18 @@ package com.example.Mistumori.api;
 import com.example.Mistumori.Repository.EstimationRepo;
 import com.example.Mistumori.Repository.UserRepo;
 import com.example.Mistumori.model.Estimation;
-import com.example.Mistumori.model.User;
 import com.example.Mistumori.payload.response.MessageResponse;
 import com.example.Mistumori.security.service.EstimationService;
 import com.example.Mistumori.security.service.UserDetailsImpl;
 import com.example.Mistumori.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -90,7 +89,7 @@ public class EstimationController{
     }
 
     @GetMapping("mod/{id}")
-    public Estimation getById(@PathVariable("id") Long id) { // 3
+    public Optional<Estimation> getById(@PathVariable("id") Long id) { // 3
         return estimationService.getEstimation(id);
     }
 
