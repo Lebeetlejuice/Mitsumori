@@ -1,8 +1,8 @@
 package com.example.Mistumori.security.service;
 
 import com.example.Mistumori.Repository.UserRepo;
+import com.example.Mistumori.model.Estimation;
 import com.example.Mistumori.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,19 +12,24 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UserService {
-    @Autowired
-    private UserRepo userRepo;
+
+    private final UserRepo userRepo;
+
+    public UserService(UserRepo userRepo1) {
+        this.userRepo = userRepo1;
+    }
+
     public List<User> listAllUser() {
         return userRepo.findAll();
     }
 
 
-    public void saveUser(User user) {
-        userRepo.save(user);
-    }
+    public User saveUser(User user) {
+       return userRepo.save(user);
+    };
 
-    public User getUser(Long id) {
-        return userRepo.findById(id).get();
+    public Optional<User> getUser(Long id) {
+        return userRepo.findById(id);
     }
 
     public void deleteUser(Long id) {

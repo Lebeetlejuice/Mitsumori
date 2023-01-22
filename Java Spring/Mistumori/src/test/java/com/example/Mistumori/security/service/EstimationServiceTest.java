@@ -64,7 +64,6 @@ class EstimationServiceTest {
     }
 
     @Test
-
     void deleteEstimation() {
         estimationService.deleteEstimation(1L);
         verify(estimationRepo).deleteById(1L);

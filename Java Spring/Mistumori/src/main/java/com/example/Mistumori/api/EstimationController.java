@@ -79,7 +79,7 @@ public class EstimationController{
     @PreAuthorize("hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         estimationService.deleteEstimation(id);
-        return new ResponseEntity<String>("Estimation is deleted successfully.!", HttpStatus.OK);
+        return new ResponseEntity<String>("Estimation is deleted successfully.!", HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/mod")

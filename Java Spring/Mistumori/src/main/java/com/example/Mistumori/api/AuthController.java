@@ -28,6 +28,7 @@ import com.example.Mistumori.security.service.UserDetailsImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -139,7 +140,7 @@ public class AuthController {
         user.setRoles(roles);
         userRepo.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return new ResponseEntity<String>("Estimation is deleted successfully.!", HttpStatus.CREATED);
     }
 
     @PostMapping("/signout")
