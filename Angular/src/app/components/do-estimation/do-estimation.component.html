@@ -1,0 +1,127 @@
+<div>
+    <h1>Faire une Estimation</h1>
+</div>
+<form
+        
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+      <div class="form-group">
+        <label for="username">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          [(ngModel)]="form.name"
+          required
+          minlength="3"
+          maxlength="20"
+          #name="ngModel"
+        />
+        <div class="alert-danger" *ngIf="name.errors && f.submitted">
+          <div *ngIf="name.errors['required']">name is required</div>
+          <div *ngIf="name.errors['minlength']">
+            name must be at least 3 characters
+          </div>
+          <div *ngIf="name.errors['maxlength']">
+            name must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="brand">Marque</label>
+        <input
+          type="text"
+          class="form-control"
+          name="brand"
+          [(ngModel)]="form.brand"
+          required
+          minlength="3"
+          maxlength="20"
+          #brand="ngModel"
+        />
+        <div class="alert-danger" *ngIf="brand.errors && f.submitted">
+          <div *ngIf="brand.errors['required']">name is required</div>
+          <div *ngIf="brand.errors['minlength']">
+            brand must be at least 3 characters
+          </div>
+          <div *ngIf="brand.errors['maxlength']">
+            brand must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="etat_du_produit">Etat du produit</label>
+        <input
+          type="etat_du_produit"
+          class="form-control"
+          name="etat_du_produit"
+          [(ngModel)]="form.etat_du_produit"
+          required
+          #etat_du_produit="ngModel"
+        />
+        <div class="alert-danger" *ngIf="etat_du_produit.errors && f.submitted">
+          <div *ngIf="etat_du_produit.errors['required']">etat_du_produit is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="date">date</label>
+        <input
+          type="date"
+          class="form-control"
+          name="date"
+          [(ngModel)]="form.date"
+          required
+          #date="ngModel"
+        />
+      </div>
+      <div class="form-group">
+        <label for="categorie">categorie</label>
+        <input
+          type="categorie"
+          class="form-control"
+          name="categorie"
+          [(ngModel)]="form.categorie"
+          required
+          minlength="2"
+          #categorie="ngModel"
+        />
+        <div class="alert-danger" *ngIf="categorie.errors && f.submitted">
+          <div *ngIf="categorie.errors['required']">categorie is required</div>
+          <div *ngIf="categorie.errors['minlength']">
+            categorie must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">description</label>
+        <input
+          type="description"
+          class="form-control"
+          name="description"
+          [(ngModel)]="form.description"
+          required
+          minlength="10"
+          #description="ngModel"
+        />
+        <div class="alert-danger" *ngIf="description.errors && f.submitted">
+          <div *ngIf="description.errors['required']">description is required</div>
+          <div *ngIf="description.errors['minlength']">
+            description must be at least 10 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Envoyer pour l'estimation</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
+        estimation failed!<br />{{ errorMessage }}
+      </div>
+      <div class="alert alert-warning" *ngIf="f.submitted && isSuccessful">
+        <p>your estimation is save and successful</p>
+      </div>
+    </form>
