@@ -68,7 +68,7 @@ class UsersControllerTest {
         long id = 1L;
 
         doNothing().when(userService).deleteUser(id);
-        this.mockMvc.perform(delete("/api/test//delete/{id}",id)
+        this.mockMvc.perform(delete("/api/test/delete/{id}",id)
                         .characterEncoding("utf-8"))
                 .andExpect(status().isNoContent())
                 .andDo(print());

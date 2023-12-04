@@ -140,7 +140,7 @@ public class AuthController {
         user.setRoles(roles);
         userRepo.save(user);
 
-        return new ResponseEntity<String>("Estimation is deleted successfully.!", HttpStatus.CREATED);
+        return new ResponseEntity<String>("User is saved successfully.!", HttpStatus.CREATED);
     }
 
     @PostMapping("/signout")
