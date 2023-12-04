@@ -1,8 +1,7 @@
-<h2> le numero de l'objet estimonSubmit()er est le {{id}}</h2>
+<h2> le numero de l'objet estimer est le {{id}}</h2>
 
-    {{data.name}}
     <form
-        
+        *ngIf="!isSuccessful"
         name="form"
         (ngSubmit)="f.form.valid && onSubmitr()"
         #f="ngForm"
@@ -14,29 +13,17 @@
           type="text"
           class="form-control"
           name="price"
-          [(ngModel)]="form.price"
+          [(ngModel)]="data.price"
           required
-          minlength="3"
-          maxlength="20"
           #price="ngModel"
         />
-        <div class="form-group">
-            <button class="btn btn-primary btn-block" (click)="onSubmitr()">Envoyer le prix estimer</button>
-          </div>
-    
-          <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
-            estimation failed!<br />{{ errorMessage }}
-          </div>
-          <div class="alert alert-warning" *ngIf="f.submitted && isSuccessful">
-            <p>your estimation is save and successful</p>
-        </div>
         <h3> Vous pouvez modifier les coordonnées si dessous si vous ne les trouvez pas bonne ou vous pouvez juste valider</h3>
         <label for="username">Name</label>
         <input
           type="text"
           class="form-control"
           name="name"
-          [(ngModel)]="form.name"
+          [(ngModel)]="data.name"
           minlength="3"
           maxlength="20"
           #name="ngModel"
@@ -56,7 +43,7 @@
           type="text"
           class="form-control"
           name="brand"
-          [(ngModel)]="form.brand"
+          [(ngModel)]="data.brand"
           minlength="3"
           maxlength="20"
           #brand="ngModel"
@@ -73,10 +60,10 @@
       <div class="form-group">
         <label for="etat_du_produit">Etat du produit</label>
         <input
-          type="etat_du_produit"
+          type="text"
           class="form-control"
           name="etat_du_produit"
-          [(ngModel)]="form.etat_du_produit"
+          [(ngModel)]="data.etat_du_produit"
           #etat_du_produit="ngModel"
         />
       </div>
@@ -86,33 +73,28 @@
           type="date"
           class="form-control"
           name="date"
-          [(ngModel)]="form.date"
+          [(ngModel)]="data.date"
           #date="ngModel"
         />
       </div>
       <div class="form-group">
         <label for="categorie">categorie</label>
         <input
-          type="categorie"
+          type="text"
           class="form-control"
           name="categorie"
-          [(ngModel)]="form.categorie"
+          [(ngModel)]="data.categorie"
           minlength="2"
           #categorie="ngModel"
         />
-        <div class="alert-danger" *ngIf="categorie.errors && f.submitted">
-          <div *ngIf="categorie.errors['minlength']">
-            categorie must be at least 6 characters
-          </div>
-        </div>
       </div>
       <div class="form-group">
         <label for="description">description</label>
         <input
-          type="description"
+          type="text"
           class="form-control"
           name="description"
-          [(ngModel)]="form.description"
+          [(ngModel)]="data.description"
           minlength="10"
           #description="ngModel"
         />
@@ -124,9 +106,8 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary btn-block">Update</button>
+        <button class="btn btn-primary btn-block" click="onSubmitr()">Update</button>
       </div>
-
       <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
         estimation failed!<br />{{ errorMessage }}
       </div>
@@ -134,3 +115,6 @@
         <p>your estimation is save and successful</p>
       </div>
     </form>
+    <div >
+      <button class="btn btn-primary btn-block" (click)="onDelete()">Delete</button>
+    </div>

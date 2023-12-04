@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EstimationService } from 'src/app/_services/estimation.service';
 import { UserService } from '../../_services/user.service';
 
@@ -11,7 +12,7 @@ export class BoardModeratorComponent implements OnInit {
   content?: string;
   data: any;
   id :any;
-  constructor(private userService: UserService, private estimationService: EstimationService) { }
+  constructor( private route: Router , private userService: UserService, private estimationService: EstimationService) { }
 
   ngOnInit(): void {
 
@@ -34,5 +35,15 @@ export class BoardModeratorComponent implements OnInit {
       }
     });
     
+  }
+  onDelete(id : string): void {
+    this.estimationService.deleteEstimation(id)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.ngOnInit();
+        },
+        error: (e) => console.error(e)
+      });
   }
 }

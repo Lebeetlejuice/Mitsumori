@@ -1,7 +1,0 @@
-{
-  "name": "Mistumori",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl, NgForm } from '@angular/forms';
+import { ActivatedRoute, Router} from '@angular/router';
 import { EstimationService } from '../_services/estimation.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { EstimationService } from '../_services/estimation.service';
   styleUrls: ['./modifyestimation.component.css']
 })
 export class ModifyestimationComponent implements OnInit {
-  data: any;
+  data: any = {};
   id: any;
   form: any = {
     name: null,
@@ -23,7 +24,8 @@ export class ModifyestimationComponent implements OnInit {
   isFailed = false;
   errorMessage = '';
 
-  constructor(private route: ActivatedRoute, private estimationService: EstimationService) { }
+  
+  constructor(private routes: Router, private route: ActivatedRoute, private estimationService: EstimationService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -33,16 +35,13 @@ export class ModifyestimationComponent implements OnInit {
       this.data=JSON.parse(data)
     })
 
-    this.form.setValue({
-      etat_du_produit : this.data.etat_du_produit
-    })
-
   }
 
 
   onSubmitr(): void {
-    const data = {price : 12}
-
+    const data = {price : this.data.price, name : this.data.name, description : this.data.description,
+    etat_du_produit: this.data.etat_du_produit, date: this.data.date, categorie: this.data.categorie, brand: this.data.brand}
+    
     this.estimationService.putEstimation(this.id, data).subscribe({
       next: datar => {
         console.log(datar);
@@ -54,6 +53,19 @@ export class ModifyestimationComponent implements OnInit {
         this.isFailed = true;
       }
     });
+  }
+
+  onDelete(): void {
+    this.estimationService.deleteEstimation(this.id)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.routes.navigateByUrl('/mod', {skipLocationChange: true}).then(() => {
+            this.routes.navigate(['ModifyestimationComponent']);
+        });
+        },
+        error: (e) => console.error(e)
+      });
   }
 
 }

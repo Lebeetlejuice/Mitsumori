@@ -1,13 +1,13 @@
 <div class="container">
     <header class="jumbotron">
-      <p>{{ content }}</p>
+      <h2>{{ content }} List of estimations :</h2>
     </header>
      <table>
       <tbody>
         <tr *ngFor="let estimation of data">
-          <div class="card" style="width: 18rem;">
+          <div class="card col-sm-3 row" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title"></h5>
+              <h5 class="card-title">{{estimation.name}}</h5>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">id : {{estimation.id}}</li>
@@ -17,11 +17,12 @@
               <li class="list-group-item">prix : {{estimation.price}}</li>
               <li class="list-group-item">date : {{estimation.date | date: 'yyyy-MM-dd'}}</li>
             </ul>
-            <div class="card-body">
-              <button [routerLink]="['/put', estimation.id]">edit </button>
-              <a href="#" class="card-link">delete</a>
-            </div>
+            <div class="card-body ">
+              <button class="btn btn-primary btn-block " [routerLink]="['/put', estimation.id]">edit </button>
+              <button class="btn btn-primary btn-block" (click)="onDelete(estimation.id)">Delete</button>
           </div>
+    </div>
+        </tr>
       </tbody>
     </table>
   </div>

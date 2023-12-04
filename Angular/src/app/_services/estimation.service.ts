@@ -37,4 +37,9 @@ export class EstimationService {
       description
     }, httpOptions);
   }
+
+  deleteEstimation(id: any): Observable<any> {
+    return this.http.delete(PRODUCT_API + 'delete/' + id, { responseType: 'text' } );
+  }
+
 }
